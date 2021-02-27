@@ -8,70 +8,68 @@ namespace csharp.Lib
     {
         public static bool IsBalanced(this string input, string balancingCharacterPairs)
         {
-            var reqClosingCharacters = new ClosingCharacters(balancingCharacterPairs);
+            var characterPairs = new CharacterPairs(balancingCharacterPairs);
+            var nextClosingCharacter = new NextClosingCharacter();
+
             foreach (var character in input)
             {
-                if (reqClosingCharacters.IsOpeningCharacter(character))
+                var isOpeningCharacter = characterPairs.IsOpening(character);
+                var isClosingCharacter = characterPairs.IsClosing(character);
+
+                if (nextClosingCharacter.Peek() == character)
                 {
-                    reqClosingCharacters.AddIfOpeningCharacter(character);
+                    nextClosingCharacter.Pop();
                 }
-                else if (reqClosingCharacters.IsClosingCharacter(character))
+                else  if (isOpeningCharacter)
                 {
-                    if (!reqClosingCharacters.CheckAndPopClosingCharacter(character))
-                    {
-                        return false;
-                    }
+                    nextClosingCharacter.Push(characterPairs.GetMatchingClosingCharacter(character));
+                }
+                else if (isClosingCharacter)
+                {
+                    return false;
                 }
             }
 
-            return reqClosingCharacters.IsEmpty();
+            return nextClosingCharacter.IsEmpty();
         }
     }
 
-    public class ClosingCharacters
+    public class CharacterPairs
     {
         private readonly Dictionary<char, char> _mapOpeningToClosingCharacters;
-        private readonly Stack<char> _requiredClosingCharacters = new();
 
-        public ClosingCharacters(string balancingCharacterPairs) =>
-            _mapOpeningToClosingCharacters = MapOpeningToClosingCharacters(balancingCharacterPairs);
-
-        private static Dictionary<char, char> MapOpeningToClosingCharacters(string balancingCharacterPairs)
+        public CharacterPairs(string balancingCharacterPairs)
         {
-            return balancingCharacterPairs.Zip(
+            _mapOpeningToClosingCharacters = balancingCharacterPairs.Zip(
                     balancingCharacterPairs.Skip(1),
                     Tuple.Create)
                 .Where((_, index) => index % 2 == 0)
                 .ToDictionary(tuple => tuple.Item1, tuple => tuple.Item2);
         }
 
-        public void AddIfOpeningCharacter(char character)
+        public bool IsClosing(char character) => _mapOpeningToClosingCharacters.Values.Contains(character);
+
+        public bool IsOpening(char character) => _mapOpeningToClosingCharacters.Keys.Contains(character);
+
+        public char GetMatchingClosingCharacter(char openingCharacter) => _mapOpeningToClosingCharacters[openingCharacter];
+    }
+
+    public class NextClosingCharacter
+    {
+        private readonly Stack<char> _requiredClosingCharacters = new();
+
+        public void Push(char character)
         {
-            if (IsOpeningCharacter(character))
-            {
-                _requiredClosingCharacters.Push(_mapOpeningToClosingCharacters[character]);
-            }
+            _requiredClosingCharacters.Push(character);
         }
 
-        public bool CheckAndPopClosingCharacter(char character)
+        public void Pop()
         {
-            if (_requiredClosingCharacters.Count == 0)
-            {
-                return false;
-            }
-
-            if (_requiredClosingCharacters.Pop() != character)
-            {
-                return false;
-            }
-
-            return true;
+            _requiredClosingCharacters.Pop();
         }
-
-        public bool IsClosingCharacter(char character) => _mapOpeningToClosingCharacters.Values.Contains(character);
-
-        public bool IsOpeningCharacter(char character) => _mapOpeningToClosingCharacters.Keys.Contains(character);
 
         public bool IsEmpty() => _requiredClosingCharacters.Count == 0;
+
+        public char? Peek() => IsEmpty() ? null : _requiredClosingCharacters.Peek();
     }
 }
