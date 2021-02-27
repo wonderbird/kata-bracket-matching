@@ -1,6 +1,7 @@
+using csharp.Lib;
 using Xunit;
 
-namespace csharp.Lib.Tests
+namespace BracketMatching.Lib.Tests
 {
     public class BalancedStringValidatorTest
     {

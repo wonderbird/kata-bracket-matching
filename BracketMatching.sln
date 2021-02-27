@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp.Lib", "csharp.Lib\csharp.Lib.csproj", "{2C823D8F-93E7-4488-BA98-C495D73C6314}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BracketMatching.Lib", "BracketMatching.Lib\BracketMatching.Lib.csproj", "{2C823D8F-93E7-4488-BA98-C495D73C6314}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp.Lib.Tests", "csharp.Lib.Tests\csharp.Lib.Tests.csproj", "{AE2D2C9B-D5C8-4D6A-B870-0A8A27F6B1A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BracketMatching.Lib.Tests", "BracketMatching.Lib.Tests\BracketMatching.Lib.Tests.csproj", "{AE2D2C9B-D5C8-4D6A-B870-0A8A27F6B1A5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{0FEF0DF3-AFA4-461D-A5EB-AC30C1990770}"
 ProjectSection(SolutionItems) = preProject

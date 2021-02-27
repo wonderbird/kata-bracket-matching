@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\csharp.Lib\csharp.Lib.csproj" />
+    <ProjectReference Include="..\BracketMatching.Lib\BracketMatching.Lib.csproj" />
   </ItemGroup>
 
 </Project>
