@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace csharp.Lib
 {
-    public static class BalancedStringValidator
+    public static class Kata
     {
         public static bool IsBalanced(this string input, string balancingCharacterPairs)
         {

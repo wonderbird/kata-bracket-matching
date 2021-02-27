@@ -30,7 +30,7 @@ namespace csharp.Lib.Tests
         public void IsBalanced_DataFromCodeWars_ExpectedResultFromCodewars(bool expectation, string input,
             string balancingCharacterPairs)
         {
-            Assert.Equal(expectation, input.IsBalanced(balancingCharacterPairs));
+            Assert.Equal(expectation, Kata.IsBalanced(input, balancingCharacterPairs));
         }
     }
 }

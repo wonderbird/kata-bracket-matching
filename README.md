@@ -17,17 +17,3 @@ dotnet build
 dotnet test
 dotnet run --project "csharp.App"
 ```
-
-## Identify Code Duplication (Windows only)
-
-The `tools\dupfinder.bat` file calls the [JetBrains dupfinder](https://www.jetbrains.com/help/resharper/dupFinder.html) tool and creates an HTML report of duplicated code blocks in the solution directory.
-
-In order to use the `tools\dupfinder.bat` you need to globally install the [JetBrains ReSharper Command Line Tools](https://www.jetbrains.com/help/resharper/ReSharper_Command_Line_Tools.html)
-
-From the folder containing the `.sln` file run
-
-```
-tools\dupfinder.bat
-```
-
-The report will be created as `dupfinder-report.html` in the current directory.
